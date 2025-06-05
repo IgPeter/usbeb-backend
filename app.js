@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import CaptureDeviceRouter from "./routes/captureDevice.js";
+import StudentDataRouter from "./routes/studentData.js";
 dotenv.config();
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(cors());
 
 //defining routes
 app.use(`${api}/captureDevice`, CaptureDeviceRouter);
+app.use(`${api}/studentData`, StudentDataRouter);
 
 mongoose
   .connect(db_conn_string)
