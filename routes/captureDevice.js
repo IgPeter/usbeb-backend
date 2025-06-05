@@ -32,10 +32,10 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
   const passport = req.file;
 
   const fileName = req.file.filename;
-  const filePath = `https://${req.get("host")}/public/upload`;
+  const filePath = `http://${req.get("host")}/public/upload`;
 
   if (!passport) {
-    res.status(400).send("passport is not available");
+    res.status(400).json({ message: "passport is not available" });
   }
 
   const captureDeviceData = new CaptureDevice({
@@ -52,7 +52,10 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
 
   try {
     const response = await captureDeviceData.save();
-    res.status(200).send("form data upload has been successful");
+    res.status(200).json({
+      message: "form data upload has been successful",
+      response: response,
+    });
   } catch (error) {
     res.status(500).send("Internal server error, record was not created");
   }
