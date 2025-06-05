@@ -23,20 +23,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post(`/`, upload.single("passport"), async (req, res) => {
-  const {
-    fullName,
-    staffId,
-    dateOfBirth,
-    gender,
-    ppa,
-    pupils,
-    fingerprintImage,
-    fingerprintTemplate,
-  } = req.body;
+  const { fullName, staffId, dateOfBirth, gender, ppa, pupils } = req.body;
 
-  if (!fingerprintImage || fingerprintTemplate) {
+  /*if (!fingerprintImage || fingerprintTemplate) {
     return res.status(400).send("Fingerprint data is missing");
-  }
+  }*/
 
   const passport = req.file;
 
@@ -55,17 +46,16 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     ppa: ppa,
     pupils: pupils,
     image: `${filePath}/${fileName}`,
-    fingerprintImage: fingerprintImage,
-    fingerprintTemplate: fingerprintTemplate,
+    //fingerprintImage: fingerprintImage,
+    //fingerprintTemplate: fingerprintTemplate,
   });
 
-  const response = await captureDeviceData.save();
-
-  if (!response) {
-    res.status(400).send("save failed");
+  try {
+    const response = await captureDeviceData.save();
+    res.status(200).send("form data upload has been successful");
+  } catch (error) {
+    res.status(500).send("Internal server error, record was not created");
   }
-
-  res.status(200).send("form data upload has been successful");
 });
 
 export default router;
