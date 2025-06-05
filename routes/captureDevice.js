@@ -32,7 +32,7 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
   const passport = req.file;
 
   const fileName = req.file.filename;
-  const filePath = `http://${req.get("host")}/public/upload`;
+  const filePath = `https://${req.get("host")}/public/upload`;
 
   if (!passport) {
     res.status(400).send("passport is not available");
