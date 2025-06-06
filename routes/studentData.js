@@ -11,7 +11,7 @@ const fileExtension = {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads");
+    cb(null, "./public/upload");
   },
   filename: function (req, file, cb) {
     const fileName = file.originalname.replace(" ", "-");
@@ -61,6 +61,22 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     });
   } catch (error) {
     res.status(500).send("Internal server error, record was not created");
+  }
+});
+
+router.get(`/`, async (req, res) => {
+  try {
+    const allStudents = await StudentData.find();
+
+    if (!allStudents.length > 0) {
+      return res.status(404).json({ message: "Found no student, upload data" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "All Subeb Students", students: allStudents });
+  } catch (error) {
+    throw new Error("Internal server error", error);
   }
 });
 
