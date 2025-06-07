@@ -4,12 +4,14 @@ const Schema = mongoose.Schema;
 
 const captureDeviceSchema = new Schema({
   name: String,
-  staffid: String,
+  staffId: String,
   dob: String,
   gender: String,
-  ppa: String,
+  nameOfSchool: String,
   contact: Number,
   address: String,
+  dateOfFA: String,
+  nin: Number,
   lga: String,
   image: String,
   fingerprintImage: String, // base64 string of the PNG

@@ -23,7 +23,18 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post(`/`, upload.single("passport"), async (req, res) => {
-  const { fullName, staffId, dateOfBirth, gender, ppa, pupils } = req.body;
+  const {
+    fullName,
+    staffId,
+    dateOfBirth,
+    gender,
+    nameOfSchool,
+    contact,
+    address,
+    dateOfFA,
+    nin,
+    lga,
+  } = req.body;
 
   /*if (!fingerprintImage || fingerprintTemplate) {
     return res.status(400).send("Fingerprint data is missing");
@@ -43,8 +54,12 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     staffId: staffId,
     dob: dateOfBirth,
     gender: gender,
-    ppa: ppa,
-    pupils: pupils,
+    nameOfSchool: nameOfSchool,
+    contact: contact,
+    address: address,
+    dateOfFA: dateOfFA,
+    nin: nin,
+    lga: lga,
     image: `${filePath}/${fileName}`,
     //fingerprintImage: fingerprintImage,
     //fingerprintTemplate: fingerprintTemplate,

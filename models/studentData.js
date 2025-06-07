@@ -11,6 +11,7 @@ const studentDataSchema = new Schema({
   address: String,
   parent: String,
   lga: String,
+  disability: String,
   image: String,
   fingerprintImage: String, // base64 string of the PNG
   fingerprintTemplate: String, // ISO template base64
