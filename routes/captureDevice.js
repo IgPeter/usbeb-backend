@@ -32,9 +32,13 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     contact,
     address,
     dateOfFA,
+    dateOfLP,
     nin,
     lga,
+    location,
   } = req.body;
+
+  const finalLocation = JSON.parse(location);
 
   /*if (!fingerprintImage || fingerprintTemplate) {
     return res.status(400).send("Fingerprint data is missing");
@@ -58,9 +62,11 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     contact: contact,
     address: address,
     dateOfFA: dateOfFA,
+    dateOfLP: dateOfLP,
     nin: nin,
     lga: lga,
     image: `${filePath}/${fileName}`,
+    location: finalLocation,
     //fingerprintImage: fingerprintImage,
     //fingerprintTemplate: fingerprintTemplate,
   });

@@ -11,9 +11,17 @@ const captureDeviceSchema = new Schema({
   contact: Number,
   address: String,
   dateOfFA: String,
+  dateOfLP: String,
   nin: Number,
   lga: String,
   image: String,
+  location: {
+    latitude: String,
+    longitude: String,
+    area: String,
+    city: String,
+    country: String,
+  },
   fingerprintImage: String, // base64 string of the PNG
   fingerprintTemplate: String, // ISO template base64
 });

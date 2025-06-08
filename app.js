@@ -8,6 +8,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import CaptureDeviceRouter from "./routes/captureDevice.js";
 import StudentDataRouter from "./routes/studentData.js";
+import FacilityDataRouter from "./models/facilityData.js";
 dotenv.config();
 
 const app = express();
@@ -32,6 +33,7 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 //defining routes
 app.use(`${api}/captureDevice`, CaptureDeviceRouter);
 app.use(`${api}/studentData`, StudentDataRouter);
+app.use(`${api}/facilityData`, FacilityDataRouter);
 
 mongoose
   .connect(db_conn_string)
