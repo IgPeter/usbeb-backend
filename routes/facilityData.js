@@ -31,6 +31,8 @@ router.post("/", async (req, res) => {
     toiletStudentsComment,
     toiletEccde,
     toiletEccdeComment,
+    toiletTeachers,
+    toiletTeachersComment,
     fencing,
     fencingComment,
     blackboard,
@@ -72,6 +74,7 @@ router.post("/", async (req, res) => {
       pupils: { value: toiletPupils, comment: toiletPupilsComments },
       students: { value: toiletStudents, comment: toiletStudentsComment },
       eccde: { value: toiletEccde, comment: toiletEccdeComment },
+      teachers: { value: toiletTeachers, comment: toiletTeachersComment },
     },
     fencing: { value: fencing, comment: fencingComment },
     teachingAid: {
