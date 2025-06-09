@@ -26,6 +26,7 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
   const {
     fullName,
     staffId,
+    ppaTeacher,
     dateOfBirth,
     gender,
     nameOfSchool,
@@ -56,6 +57,7 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
   const captureDeviceData = new CaptureDevice({
     name: fullName,
     staffId: staffId,
+    ppaTeacher: ppaTeacher,
     dob: dateOfBirth,
     gender: gender,
     nameOfSchool: nameOfSchool,

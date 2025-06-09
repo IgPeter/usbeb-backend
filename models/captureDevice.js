@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const captureDeviceSchema = new Schema({
   name: String,
   staffId: String,
+  ppaTeacher: String,
   dob: String,
   gender: String,
   nameOfSchool: String,
