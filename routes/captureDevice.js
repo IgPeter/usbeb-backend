@@ -37,6 +37,8 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     nin,
     lga,
     location,
+    fingerprintImage,
+    fingerprintTemplate
   } = req.body;
 
   const finalLocation = JSON.parse(location);

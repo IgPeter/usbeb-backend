@@ -23,8 +23,18 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post(`/`, upload.single("passport"), async (req, res) => {
-  const { fullName, classID, dateOfBirth, age, sex, address, parents, lga } =
-    req.body;
+  const {
+    fullName,
+    classID,
+    dateOfBirth,
+    age,
+    sex,
+    address,
+    parents,
+    lga,
+    fingerprintImage,
+    fingerprintTemplate,
+  } = req.body;
 
   /*if (!fingerprintImage || fingerprintTemplate) {
     return res.status(400).send("Fingerprint data is missing");
