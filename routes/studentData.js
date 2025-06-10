@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
       fs.mkdirSync(uploadDir, { recursive: true });
     }
 
-    cb(null, uploadDirs);
+    cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
     const fileName = file.originalname.replace(" ", "-");
