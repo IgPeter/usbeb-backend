@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import CaptureDevice from "../models/captureDevice.js";
+import StaffDataModel from "../models/staffData.js";
 const router = express.Router();
 
 const fileExtension = {
@@ -26,7 +26,6 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
   const {
     fullName,
     staffId,
-    ppaTeacher,
     dateOfBirth,
     gender,
     nameOfSchool,
@@ -38,7 +37,7 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     lga,
     location,
     fingerprintImage,
-    fingerprintTemplate
+    fingerprintTemplate,
   } = req.body;
 
   const finalLocation = JSON.parse(location);
@@ -56,10 +55,9 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     res.status(400).json({ message: "passport is not available" });
   }
 
-  const captureDeviceData = new CaptureDevice({
+  const staffData = new StaffDataModel({
     name: fullName,
     staffId: staffId,
-    ppaTeacher: ppaTeacher,
     dob: dateOfBirth,
     gender: gender,
     nameOfSchool: nameOfSchool,
@@ -76,7 +74,7 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
   });
 
   try {
-    const response = await captureDeviceData.save();
+    const response = await staffData.save();
     res.status(200).json({
       message: "form data upload has been successful",
       response: response,
@@ -88,7 +86,7 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
 
 router.get(`/`, async (req, res) => {
   try {
-    const allStaffs = await CaptureDevice.find();
+    const allStaffs = await StaffDataModel.find();
 
     if (!allStaffs.length > 0) {
       return res.status(404).json({ message: "Found no staffs, upload data" });

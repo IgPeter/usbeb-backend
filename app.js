@@ -6,9 +6,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-import CaptureDeviceRouter from "./routes/captureDevice.js";
+import StaffDataRouter from "./routes/staffData.js";
 import StudentDataRouter from "./routes/studentData.js";
-import FacilityDataRouter from "./models/facilityData.js";
+import FacilityDataRouter from "./routes/facilityData.js";
 dotenv.config();
 
 const app = express();
@@ -31,7 +31,7 @@ app.use(cors());
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 //defining routes
-app.use(`${api}/captureDevice`, CaptureDeviceRouter);
+app.use(`${api}/staffData`, StaffDataRouter);
 app.use(`${api}/studentData`, StudentDataRouter);
 app.use(`${api}/facilityData`, FacilityDataRouter);
 
@@ -45,6 +45,9 @@ mongoose
     throw new Error("Database connection failed");
   });
 
+mongoose.connection.on("error", (err) => {
+  console.error("Mongoose runtime error:", err);
+});
 /*app.listen(PORT, () => {
   console.log(`app is running at localhost: ${PORT}`);
 })*/

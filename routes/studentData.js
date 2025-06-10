@@ -25,6 +25,7 @@ const upload = multer({ storage: storage });
 router.post(`/`, upload.single("passport"), async (req, res) => {
   const {
     fullName,
+    nameOfSchool,
     classID,
     dateOfBirth,
     age,
@@ -32,8 +33,8 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     address,
     parents,
     lga,
-    fingerprintImage,
-    fingerprintTemplate,
+    //fingerprintImage,
+    //fingerprintTemplate,
   } = req.body;
 
   /*if (!fingerprintImage || fingerprintTemplate) {
@@ -51,6 +52,7 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
 
   const student = new StudentData({
     name: fullName,
+    nameOfSchool: nameOfSchool,
     class: classID,
     dob: dateOfBirth,
     age: age,
@@ -59,8 +61,8 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     parent: parents,
     lga: lga,
     image: `${filePath}/${fileName}`,
-    fingerprintImage: fingerprintImage,
-    fingerprintTemplate: fingerprintTemplate,
+    //fingerprintImage: fingerprintImage,
+    //fingerprintTemplate: fingerprintTemplate,
   });
 
   try {

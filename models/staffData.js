@@ -2,10 +2,9 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const captureDeviceSchema = new Schema({
+const staffDataSchema = new Schema({
   name: String,
   staffId: String,
-  ppaTeacher: String,
   dob: String,
   gender: String,
   nameOfSchool: String,
@@ -27,6 +26,6 @@ const captureDeviceSchema = new Schema({
   fingerprintTemplate: String, // ISO template base64
 });
 
-const CaptureDeviceModel = mongoose.model("CaptureDevice", captureDeviceSchema);
+const StaffDataModel = mongoose.model("StaffData", staffDataSchema);
 
-export default CaptureDeviceModel;
+export default StaffDataModel;

@@ -2,37 +2,32 @@ import express from "express";
 import FacilityDataModel from "../models/facilityData.js";
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post(`/`, async (req, res) => {
   const {
     blocksOfClassrooms,
-    pupilsNumOfClassroom,
-    numPupilsComment,
-    numStudentsClassroom,
-    numStudentsComment,
+    nameOfSchool,
     numEccdeClassroom,
     numEccdeComment,
-    venPupils,
-    venPupilsComment,
-    venStudents,
-    venStudentsComment,
+    numPrimaryClassroom,
+    numPrimaryClassroomComment,
+    numUbeJssClassroom,
+    numUbeJssClassroomComment,
     venEccde,
     venEccdeComment,
-    numFurniturePupils,
-    numFurniturePupilsComment,
-    numFurnitureStudents,
-    numFurnitureStudentsComment,
-    numFurnitureEccde,
-    numFurnitureEccdeComment,
-    teacherFurniture,
-    teacherFurnitureComment,
-    toiletPupils,
-    toiletPupilsComments,
-    toiletStudents,
-    toiletStudentsComment,
-    toiletEccde,
-    toiletEccdeComment,
-    toiletTeachers,
-    toiletTeachersComment,
+    venPrimary,
+    venPrimaryComment,
+    venUbeJss,
+    venUbeJssComment,
+    eccdeFurniture,
+    eccdeFurnitureComment,
+    primaryFurniture,
+    primaryFurnitureComment,
+    ubeJssFurniture,
+    ubeJssFurnitureComment,
+    teachersFurniture,
+    teachersFurnitureComment,
+    toilet,
+    toiletComment,
     fencing,
     fencingComment,
     blackboard,
@@ -43,45 +38,55 @@ router.post("/", async (req, res) => {
     whiteboardComment,
     lessonNotes,
     lessonNotesComment,
+    curriculum,
+    curriculumComment,
+    eccdeLearningMaterials,
+    elmComment,
     agricFarm,
     agricFarmComment,
     sportFacility,
     sportFacilityComment,
   } = req.body;
 
+  console.log("I have read all data successfully");
+
   const facilityData = new FacilityDataModel({
     blocksOfClassrooms: blocksOfClassrooms,
+    nameOfSchool: nameOfSchool,
     numOfClassrooms: {
-      pupils: { value: pupilsNumOfClassroom, comment: numPupilsComment },
-      students: { value: numStudentsClassroom, comment: numStudentsComment },
       eccde: { value: numEccdeClassroom, comment: numEccdeComment },
+      primary: {
+        value: numPrimaryClassroom,
+        comment: numPrimaryClassroomComment,
+      },
+      ubeJss: { value: numUbeJssClassroom, comment: numUbeJssClassroomComment },
     },
     venOrConducive: {
-      pupils: { value: venPupils, comment: venPupilsComment },
-      students: { value: venStudents, comment: venStudentsComment },
       eccde: { value: venEccde, comment: venEccdeComment },
+      primary: { value: venPrimary, comment: venPrimaryComment },
+      ubeJss: { value: venUbeJss, comment: venUbeJssComment },
     },
     numOfFurnitures: {
-      pupils: { value: numFurniturePupils, comment: numFurniturePupilsComment },
-      students: {
-        value: numFurnitureStudents,
-        comment: numFurnitureStudentsComment,
+      eccde: { value: eccdeFurniture, comment: eccdeFurnitureComment },
+      primary: {
+        value: primaryFurniture,
+        comment: primaryFurnitureComment,
       },
-      eccde: { value: numFurnitureEccde, comment: numFurnitureEccdeComment },
-      teachers: { value: teacherFurniture, comment: teacherFurnitureComment },
+      ubeJss: { value: ubeJssFurniture, comment: ubeJssFurnitureComment },
+      teachers: { value: teachersFurniture, comment: teachersFurnitureComment },
     },
-    toiletFacility: {
-      pupils: { value: toiletPupils, comment: toiletPupilsComments },
-      students: { value: toiletStudents, comment: toiletStudentsComment },
-      eccde: { value: toiletEccde, comment: toiletEccdeComment },
-      teachers: { value: toiletTeachers, comment: toiletTeachersComment },
-    },
+    toiletFacility: { value: toilet, comment: toiletComment },
     fencing: { value: fencing, comment: fencingComment },
     teachingAid: {
       blackboard: { value: blackboard, comment: blackboardComment },
       textbook: { value: textbook, comment: textbookComment },
       whiteboard: { value: whiteboard, comment: whiteboardComment },
       lessonNotes: { value: lessonNotes, comment: lessonNotesComment },
+      curriculum: { value: curriculum, comment: curriculumComment },
+      eccdeLearningMaterials: {
+        value: eccdeLearningMaterials,
+        comment: elmComment,
+      },
     },
     agricFarm: { value: agricFarm, comment: agricFarmComment },
     sportFacility: { value: sportFacility, comment: sportFacilityComment },
@@ -89,13 +94,13 @@ router.post("/", async (req, res) => {
 
   try {
     const newFacilityData = await facilityData.save();
+
     res.status(200).json({
       message: "Facility Data Has Been Created",
       facilityData: newFacilityData,
     });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
-    throw new Error("Internal Server Error ", error);
   }
 });
 
