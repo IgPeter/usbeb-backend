@@ -62,7 +62,7 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
     address: address,
     parent: parents,
     lga: lga,
-    disability,
+    disability: disability,
     disabilityInfo: disabilityInfo,
     image: `${filePath}/${fileName}`,
     //fingerprintImage: fingerprintImage,
