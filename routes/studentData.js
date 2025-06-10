@@ -18,14 +18,7 @@ const fileExtension = {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, "public", "upload");
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-
-    console.log("Upload directory:", uploadDir);
-
-    cb(null, uploadDir);
+    cb(null, "public/upload/students");
   },
   filename: function (req, file, cb) {
     const fileName = file.originalname.replace(" ", "-");
@@ -60,7 +53,7 @@ router.post(`/`, upload.single("passport"), async (req, res) => {
   const passport = req.file;
 
   const fileName = req.file.filename;
-  const filePath = `https://${req.get("host")}/public/upload`;
+  const filePath = `https://${req.get("host")}/public/upload/students`;
 
   if (!passport) {
     res.status(400).json({ message: "passport is not available" });
