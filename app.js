@@ -29,7 +29,7 @@ app.use(cors());
 
 //serving static files
 app.use("/public", express.static(path.join(__dirname, "public")));
-app.use("/upload", express.static(path.join(__dirname, "public", "upload")));
+//app.use("/upload", express.static(path.join(__dirname, "public", "upload")));
 
 //defining routes
 app.use(`${api}/staffData`, StaffDataRouter);
