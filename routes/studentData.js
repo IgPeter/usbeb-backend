@@ -11,7 +11,12 @@ const fileExtension = {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./public/upload");
+    const uploadDir = path.join(__dirname, "public", "upload");
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    cb(null, uploadDirs);
   },
   filename: function (req, file, cb) {
     const fileName = file.originalname.replace(" ", "-");
